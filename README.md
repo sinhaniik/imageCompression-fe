@@ -1,192 +1,77 @@
-# TypeScript Frontend Boilerplate (React + Vite)
+# 📸 Image Compressor (Frontend)
 
-A modern, lightweight frontend boilerplate built with **React**, **TypeScript**, **React Router**, **Redux Toolkit**, and **Tailwind CSS**, using **Vite** as the build tool. This project provides a clean starting point for scalable web applications, with a focus on developer experience and production-ready practices inspired by apps like [Cal.com](https://cal.com) and [Dub.sh](https://dub.sh).
+A simple and user-friendly web app to compress images (JPG, PNG) by setting a target size in KB.  
+This project communicates with a backend API (`/api/compress`) to perform the compression and returns a downloadable compressed image.
 
----
+## 🚀 Tech Stack
 
-## 🚀 Features
+- **React** (with TypeScript)
+- **Redux Toolkit** (for state management)
+- **Tailwind CSS** (for styling)
+- **Axios** (for API calls)
 
-- **TypeScript**: Type-safe development with strict typing for components and state.
-- **React Router**: Declarative client-side routing with sample routes (`/` and `404`).
-- **Redux Toolkit**: Modern state management with slices and TypeScript support.
-- **Tailwind CSS**: Utility-first styling with custom design tokens and production optimization.
-- **Vite**: Fast development server and optimized production builds.
-- **Prettier**: Consistent code formatting for clean, readable code.
-- **Structured Architecture**: Organized folder structure for components, pages, and assets.
+## 🎯 Features
 
----
+- Upload an image (JPG, PNG)
+- Input target size (in KB)
+- Compress image via backend API
+- Download the compressed image automatically
+- Preview selected image before compressing
 
-## 📦 Prerequisites
+## 📦 Installation
 
-Make sure you have the following installed:
-
-- **Node.js**: Version 18.x or higher (LTS recommended)
-- **npm**: Version 9.x or higher (or yarn/pnpm)
-- **Git**: To clone the repository
-
----
-
-## 🛠 Getting Started
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/sinhaniik/fe-ts-boilerplate.git
-cd ts-fe-boilerplate
-```
-
-### 2. Install Dependencies
-```bash
-npm install
-```
-
-### 3. Run the Development Server
-```bash
-npm run dev
-```
-- Opens the app at [http://localhost:5173](http://localhost:5173).
-- Vite’s hot module replacement (HMR) ensures fast reloads.
-
-### 4. Explore the App
-- Visit `/` to see the home page with a Redux-powered counter.
-- Visit an invalid route (e.g., `/random`) to see the 404 page.
-- Use “Increment” and “Decrement” buttons to test Redux state.
-
-### 5. Format Code (Optional)
-```bash
-npm run format
-```
-
----
-
-## 🧱 Project Structure
-```
-ts-fe-boilerplate/
-├── public/                    # Static assets served at root (e.g., favicon.ico)
-│   ├── index.html            # Main HTML template
-│   └── favicon.ico           # Browser favicon
-├── src/                      # Source code
-│   ├── assets/               # Images, fonts, etc.
-│   │   └── images/           # Example: logo.png
-│   ├── components/           # Reusable UI components
-│   │   ├── Button.tsx
-│   │   └── Home.tsx
-│   ├── pages/                # Page components for routing
-│   │   ├── HomePage.tsx
-│   │   └── NotFoundPage.tsx
-│   ├── store/                # Redux store and slices
-│   │   ├── slices/
-│   │   │   └── counterSlice.ts
-│   │   └── index.ts
-│   ├── App.tsx               # Main app with routing
-│   ├── index.tsx             # Entry point
-│   ├── styles.css            # Global styles with Tailwind CSS
-│   └── react-app-env.d.ts    # Type declarations
-├── .gitignore
-├── package.json
-├── prettier.config.js
-├── tailwind.config.js
-├── tsconfig.json
-├── tsconfig.node.json
-├── vite.config.ts
-└── README.md
-```
-
----
-
-## 🔧 Available Scripts
-
-```bash
-npm run dev        # Start Vite development server
-npm run build      # Build the app for production
-npm run preview    # Serve the production build locally
-npm run format     # Format files with Prettier
-```
-
----
-
-## 🚢 Building for Production
-
-To create an optimized build:
-```bash
-npm run build
-```
-- Outputs to `dist/`
-- Tailwind CSS uses PurgeCSS to remove unused styles
-
-### Test the Build:
-```bash
-npm run preview
-```
-
----
-
-## 🧩 Troubleshooting
-
-### Redux Error:
-**Uncaught Error: could not find react-redux context value**
-
-Ensure your `src/index.tsx` wraps `<App />` with `<Provider>`:
-```tsx
-import { Provider } from 'react-redux';
-import store from './store';
-root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
-```
-
-### Tailwind Not Working:
-- Check `src/styles.css` includes:
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-- Ensure `styles.css` is imported in `index.tsx`.
-
-### Port Conflict:
-- Set a custom port in `vite.config.ts`:
-```ts
-server: {
-  port: 3000
-}
-```
-
-### Build Issues:
-```bash
-rm -rf node_modules package-lock.json
-npm install
-npm run build
-```
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch:
+1. **Clone the repo**
    ```bash
-   git checkout -b feature/your-feature
+   git clone https://github.com/yourusername/image-compressor-frontend.git
+   cd image-compressor-frontend
    ```
-3. Commit your changes:
+
+2. **Install dependencies**
    ```bash
-   git commit -m "Add your feature"
+   npm install
    ```
-4. Push and open a Pull Request
 
----
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
-## 📄 License
-MIT License
+4. Frontend will be running at:
+   `http://localhost:5173` (or whichever port your Vite/CRA is configured)
 
----
+## 🔗 Backend API Requirement
 
-## 🙏 Acknowledgments
-- Inspired by production apps like [Cal.com](https://cal.com) and [Dub.sh](https://dub.sh)
-- Built with Vite, React, and Tailwind CSS
+Make sure your backend API is running at:
 
----
+```bash
+POST http://localhost:3000/api/compress
+```
 
-Happy hacking! 💻
+**Payload:**
+- FormData with fields:
+  - `image`: (File)
+  - `targetSizeKB`: (Number)
 
+Backend responds with the compressed image as a binary blob.
+
+## 📝 Usage Flow
+
+1. **Select Image**
+   - Choose an image file (.jpg, .png) from your computer.
+
+2. **Enter Target Size**
+   - Specify the desired size in KB (example: 50KB).
+
+3. **Click "🔥 Compress Image"**
+   - Sends request to backend
+   - Waits for compressed image response
+
+4. **Download Starts Automatically**
+   - The compressed image gets downloaded.
+
+## 📋 TODOs (Optional Improvements)
+
+* Show compressed image preview before downloading
+* Add drag-and-drop image upload
+* Display original vs compressed size
+* Mobile responsive tweaks
