@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './slices/counterSlice';
+import compressionReducer from './slices/compressionSlice';
+import imageUploadReducer from './slices/imageUploadSlice';
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    compression: compressionReducer,
+    imageUpload: imageUploadReducer,
   },
 });
 
